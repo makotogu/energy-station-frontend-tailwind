@@ -1,23 +1,19 @@
-import logo from './logo.svg';
 import './App.css';
+import Header from './views/Header'
+import NavBar from './views/NavBar';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={{height: '100vh'}}>
+      <Header/>
+      <div className="container flex flex-row flex-nowrap h-5/6">
+        <div className="flex-none sm:w-32 hidden sm:block">
+          <NavBar/>
+        </div>
+        <div className="flex-grow border-2">
+          <h1>container</h1>
+        </div>
+      </div>
     </div>
   );
 }
