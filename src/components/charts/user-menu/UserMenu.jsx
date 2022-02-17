@@ -9,7 +9,7 @@ export default function UserMenu() {
   return (
       <Menu>
           <Menu.Button className="hidden sm:inline text-xl left-0 ">User</Menu.Button>
-          <Menu.Button className="inline sm:hidden text-xl left-0"><UserIcon className="h-8 absolute bottom-0 right-2" /></Menu.Button>
+          <Menu.Button className="inline sm:hidden text-xl left-0"><UserIcon className="h-8 absolute bottom-0 right-2 text-gray-400" /></Menu.Button>
           <Transition
               as={Fragment}
               enter="transition ease-out duration-100"
