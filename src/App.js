@@ -19,7 +19,7 @@ function App() {
             <div className="hidden sm:block border-r-2">
               <NavBar />
             </div>
-            <div className="w-11/12 ml-1 border-2 ">
+            <div className="w-11/12 h-full ml-1 border-2 ">
               <Switch>
                 <Route exact path="/">
                   <Home />

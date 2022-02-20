@@ -1,6 +1,6 @@
 import React from 'react';
 import logo from '../static/img/SHU_LOGO.svg';
-import UserMenu from '../components/charts/user-menu/UserMenu';
+import UserMenu from '../components/user-menu/UserMenu';
 import { Link } from 'react-router-dom';
 import DropNav from '../components/drop-nav/DropNav';
 

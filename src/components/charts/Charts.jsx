@@ -49,6 +49,6 @@ export default function Charts(props) {
     }, [props])
     return (
     <>
-          <div id="myChart" style={{height: props.style.height , width: props.style.width}} className=""></div>
+          <div id="myChart" className="h-96 w-full" />
     </>
 );}
