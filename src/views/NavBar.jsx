@@ -15,7 +15,7 @@ export default function NavBar() {
         setNav(Array.from(document.getElementsByClassName("nav")));
     },[]);
 
-    useEffect (()=>{ 
+    useEffect (()=>{
         if (isCollapse) {
             navItems.forEach((element) => { element.classList.remove("block") });
             navItems.forEach((element) => { element.classList.add("hidden") });
@@ -31,7 +31,7 @@ export default function NavBar() {
                 navItems.forEach((element) => { element.classList.remove("hidden") });
             }, 120)
         }
-    },[isCollapse]);
+    }, [isCollapse, nav, navItems]);
     return (
         <div className="nav sm:w-36 " onMouseEnter={() => {setIsCollapsed(false)}} onMouseLeave={() => {setIsCollapsed(true)}}>
             <Link to="/" className="nav-item-group">
