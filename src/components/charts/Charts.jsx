@@ -49,6 +49,6 @@ export default function Charts(props) {
     }, [props])
     return (
     <>
-          <div id="myChart" className="h-96 w-full" />
+          <div id="myChart" className="h-96 sm:h-64 w-full" />
     </>
 );}
