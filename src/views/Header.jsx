@@ -6,7 +6,7 @@ import DropNav from '../components/drop-nav/DropNav';
 
 export default function Header() {
   return (
-    <div className="flex flex-row relative h-16 sm:h-20 shadow-lg ">
+    <div className="flex flex-row relative h-16 sm:h-20 shadow-lg bg-blue-50 bg-opacity-50 mb-2">
         <div className="visible absolute left-2 top-2" >
             <Link to="/">
                 <img src={logo} alt="logo" className="h-12 sm:h-16" />

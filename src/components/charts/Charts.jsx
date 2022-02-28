@@ -46,7 +46,9 @@ export default function Charts(props) {
         let myChart = echarts.init(document.getElementById('myChart'));
         myChart.setOption(option);
         myChart.resize();
-    }, [props])
+    },
+    // eslint-disable-next-line
+    [props])
     return (
     <>
           <div id="myChart" className="h-96 sm:h-64 w-full" />

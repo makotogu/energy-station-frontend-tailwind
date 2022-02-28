@@ -6,15 +6,18 @@ export default function ChartCard( props ) {
     const [edata, setEdata] = useState({});
     const [isLoading, setIsLoading] = useState(true);
     const [range, setRange] = useState(30);
+
     useEffect( () => {
-        fetch("http://192.168.0.105:81/EnergyStationData/" + props.typeData + "?limit=" + range, { method: 'GET' })
+        fetch("http://192.168.0.105:8082/EnergyStationData/" + props.typeData + "?limit=" + range, { method: 'GET' })
             .then(resonse => resonse.json())
             .then(data => {
                 setEdata(data.data);
                 setIsLoading(false);
             })
             .catch(error => { console.log(error);});
-    }, [range]);
+    },
+    // eslint-disable-next-line
+    [range]);
     return (
         <div>
             <div id={"chartContainer"+props.typeData} style={{marginBottom:"20px"}}>

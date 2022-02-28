@@ -11,7 +11,7 @@ const people = [
 export default function DropNav() {
     const [selected, setSelected] = useState(people[0]);
     return (
-        <div className="w-22">
+        <div className="w-22 text-blue-900">
             <Listbox value={selected} onChange={setSelected}>
                 <div className="relative mt-1">
                     <Listbox.Button className="relative w-full py-2 pl-3 pr-10 text-left cursor-default focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 sm:text-sm">

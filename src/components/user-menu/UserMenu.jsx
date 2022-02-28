@@ -46,20 +46,20 @@ export default function UserMenu() {
                     <Menu.Items className="origin-top-right absolute right-0 mt-2 w-24 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
                         <Menu.Item >
                             {({ active }) => (
-                                <a
+                                <div
                                     className={classNames(active ? 'bg-gray-100' : '', 'flex justify-end text-base text-gray-700')}
                                 >
                                     <Link to="/setting">设置&nbsp;&nbsp;&nbsp;&nbsp;</Link>
-                                </a>
+                                </div>
                             )}
                         </Menu.Item>
                         <Menu.Item>
                             {({ active }) => (
-                                <a
+                                <div
                                     className={classNames(active ? 'bg-gray-100' : '', 'flex justify-end mt-2 text-base text-gray-700')}
                                 >
                                     {active ? <div onClick={handleLogout}>退出&nbsp;&nbsp;&nbsp;&nbsp;</div> : <div>退出&nbsp;&nbsp;&nbsp;&nbsp;</div>}
-                                </a>
+                                </div>
                             )}
                         </Menu.Item>
                     </Menu.Items>
