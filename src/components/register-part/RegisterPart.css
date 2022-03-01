@@ -1,0 +1,19 @@
+.username-input {
+    @apply col-start-1 col-span-12 row-start-2 row-span-1 
+}
+
+.password-input {
+    @apply col-start-1 col-span-12 row-start-3 row-span-1 
+}
+
+.input-bottom-border {
+    @apply absolute transition duration-500 ease-in-out left-4 w-11/12 h-10 border-gray-300 border-b-2 z-0 focus:outline-none focus:border-blue-400
+}
+
+.input-text {
+    @apply absolute transition duration-500 ease-in-out text-lg mt-1 left-4 z-10 text-gray-700 peer-focus:scale-75 peer-focus:-translate-y-6 peer-focus:-translate-x-2 peer-focus:text-blue-900
+}
+
+.input-text-small {
+    @apply absolute text-lg mt-1 left-4 z-10 text-gray-700 scale-75 -translate-y-6 -translate-x-2 text-blue-900
+}
