@@ -44,7 +44,7 @@ export default function LoginPart() {
                     }
                 </div>
                 <div className="h-16 col-start-4 col-span-6 row-start-4 row-span-1 ">
-                    <button onClick={handleLogin} className="transition duration-100 ease-in-out hover:outline-none hover:bg-blue-600 focus:outline-none focus:bg-blue-600 bg-blue-800 bg-opacity-75 w-full py-2 px-6 rounded-xl  mt-2">
+                    <button onClick={handleLogin} className="login-button">
                         <span className="text-white">登陆</span>
                     </button>
                 </div>

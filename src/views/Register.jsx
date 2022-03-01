@@ -1,13 +1,15 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
 import RegisterPart from '../components/register-part/RegisterPart'
+import logo from '../static/img/SHU_LOGO.svg'
 
 export default function Register() {
   return (
-        <div className="h-full">
-            <div className="w-full shadow-md text-2xl text-blue-900 bg-blue-50 bg-opacity-50 pl-6 p-4 mb-4">能源站监控管理平台</div>
-            <RegisterPart />
-            <Link to="/login" className="font-light">已经有账号了？请<span className="underline">登陆</span></Link>
-        </div>
+      <div className="h-full">
+        <div className="w-full shadow-md text-2xl text-blue-900 bg-blue-50 bg-opacity-50 pl-6 p-4 mb-4">能源站监控管理平台</div>
+      <div className="h-32 flex flex-row justify-center my-8 ">
+        <img src={logo} alt="logo" className="w-24" />
+      </div>
+        <RegisterPart />
+      </div>
   )
 }
