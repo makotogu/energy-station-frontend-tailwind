@@ -5,6 +5,7 @@ import NavBar from './views/NavBar';
 import Login from './views/Login';
 import Home from './views/Home';
 import Setting from './views/Setting';
+import Register from './views/Register';
 
 function App() {
   return (
@@ -12,6 +13,9 @@ function App() {
       <Switch>
         <Route exact path="/login">
           <Login />
+        </Route>
+        <Route exact path="/register">
+          <Register />
         </Route>
         <div style={{ height: '100vh' ,width: '100vw' }} className="flex flex-col">
           <Header />
@@ -33,7 +37,6 @@ function App() {
           </div>
         </div>
       </Switch>
-
     </Router>
 
   );
