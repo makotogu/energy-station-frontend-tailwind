@@ -1,17 +1,27 @@
 import { Transition } from '@headlessui/react';
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import useSWR from 'swr';
 import { Link } from 'react-router-dom';
 import { useTimeoutFn } from 'react-use';
-import './LoginPart.css'
+import './LoginPart.css';
+
+const loginFetcher = (url) => fetch(url).then((res) => res.json());
 
 export default function LoginPart() {
     const [ , , resetErrorFlag] = useTimeoutFn(()=>{setLoginErrorFlag(false);}, 2*1000)
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [loginErrorFlag, setLoginErrorFlag] = useState(false);
+    const { data, error } = useSWR(
+        "http://localhost:8080/",
+        loginFetcher
+    );
     const handleLogin = () => {
         if (username !== "" && password !== "" ) {
-            console.log("我要登陆了");
+            if (error) {
+                console.log("错啦")
+            };
+            if (!data) return "Loading...";
         } else {
             setLoginErrorFlag(true);
             resetErrorFlag();
