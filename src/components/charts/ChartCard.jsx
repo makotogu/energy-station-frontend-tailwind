@@ -8,7 +8,7 @@ export default function ChartCard( props ) {
     const [range, setRange] = useState(30);
 
     useEffect( () => {
-        fetch("http://192.168.0.105:8082/EnergyStationData/" + props.typeData + "?limit=" + range, { method: 'GET' })
+        fetch("http://localhost:8888/data/" + props.typeData + "?limit=" + range, { method: 'GET' })
             .then(resonse => resonse.json())
             .then(data => {
                 setEdata(data.data);
