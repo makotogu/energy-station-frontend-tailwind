@@ -1,23 +1,23 @@
 import React from 'react';
-import logo from '../static/img/SHU_LOGO.svg';
 import UserMenu from '../components/user-menu/UserMenu';
 import { Link } from 'react-router-dom';
-import DropNav from '../components/drop-nav/DropNav';
+import { GlobeIcon } from '@heroicons/react/outline';
+
 
 export default function Header() {
   return (
-    <div className="flex flex-row relative h-16 sm:h-20 shadow-lg bg-blue-50 bg-opacity-50 mb-2">
+      <div className="flex flex-row relative h-20 shadow-lg bg-gradient-to-r from-blue-300/25 to-blue-200/25 dark:bg-black/50">
         <div className="visible absolute left-2 top-2" >
             <Link to="/">
-                <img src={logo} alt="logo" className="h-12 sm:h-16" />
+                <GlobeIcon className="h-16 dark:text-white animate-spinXXSlow text-blue-600 rounded-full" />
             </Link>
         </div>
-        <div className="hidden sm:block absolute left-20 bottom-3">
-            <h1 className="text-3xl bottom-0">能源站监控</h1>
+        <div className="block absolute left-20 -top-1.5">
+            <div className="text-5xl font-normal leading-loose dark:text-gray-50 tracking-wider dark:font-medium">能源站监控</div>
         </div>
-        <div className="block sm:hidden absolute px-14 bottom-3">
+        {/* <div className="block sm:hidden absolute px-14 bottom-3">
             <div className="text-xl"><DropNav/></div>
-        </div>
+        </div> */}
         <div className="absolute right-2 bottom-3.5 ">
             <div className="p-2 ">
                 <UserMenu/>
