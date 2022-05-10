@@ -1,28 +1,29 @@
 import React from 'react';
-import UserMenu from '../components/user-menu/UserMenu';
-import { Link } from 'react-router-dom';
-import { GlobeIcon } from '@heroicons/react/outline';
+import { Avatar, Divider, Stack } from '@mui/material';
 
 
 export default function Header() {
-  return (
-      <div className="flex flex-row relative h-20 shadow-lg bg-gradient-to-r from-blue-300/25 to-blue-200/25 dark:bg-black/50">
-        <div className="visible absolute left-2 top-2" >
-            <Link to="/">
-                <GlobeIcon className="h-16 dark:text-white animate-spinXXSlow text-blue-600 rounded-full" />
-            </Link>
-        </div>
-        <div className="block absolute left-20 -top-1.5">
-            <div className="text-5xl font-normal leading-loose dark:text-gray-50 tracking-wider dark:font-medium">能源站监控</div>
-        </div>
-        {/* <div className="block sm:hidden absolute px-14 bottom-3">
-            <div className="text-xl"><DropNav/></div>
-        </div> */}
-        <div className="absolute right-2 bottom-3.5 ">
-            <div className="p-2 ">
-                <UserMenu/>
+    return (
+        <div className={"absolute h-20 mb-1 right-0 w-[" + window.outerWidth - 256 + "px]"}>
+            <div
+                className="fixed right-4 top-4 "
+                style={{
+                    border: "none",
+                    backgroundImage: "linear-gradient(#E7F1F9, #EDF5FC),linear-gradient(to bottom right, #FFFFFF, #FFFFFF, #CAD6E5)",
+                    padding: "0.5px",
+                    borderRadius: "20px",
+                    backgroundClip: "content-box,padding-box",
+                    textAlign: "left",
+                    boxShadow: "8px 2px 32px 0px rgba(18,61,101,0.15), -8px -8px 20px 0px rgba(255,255,255,0.6), inset -4px -3px 40px 0px rgba(255,255,255,0.09)",
+                }}
+            >
+                <Stack direction="row" spacing="0.5rem" sx={{marginX:"12px", marginY:"8px"}} divider={<Divider orientation="vertical" flexItem />}>
+                    <Avatar style={{ backgroundImage: "linear-gradient(to bottom right, #FFA061, #F7B500" }} >{localStorage.getItem("username") === null ? "G" : localStorage.getItem("username")[0] }</Avatar>
+                    <div className="inline-block text-[#3E5769] text-2xl pt-[4px]">
+                        {localStorage.getItem("username") === null ? "Guest" : localStorage.getItem("username")}
+                    </div>
+                </Stack>
             </div>
         </div>
-    </div>
-  )
+    )
 }

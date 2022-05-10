@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import LoadingAnime from '../anime/LoadingAnime';
-import "./FullTable.css";
+
 
 const tableHeader = [
     "环境采样节点ID", "节点类型", "结点状态", "电池电压", "数据点数",
@@ -14,9 +14,9 @@ const tableHeaderCode = [
     "first_sampling_point_atmospheric_pressure", "first_sampling_point_wind_speed", "first_sampling_point_wind_direction", "receive_time", "software_version_number"
 ];
 const selectItems = [];
-for(var i = 0; i < tableHeader.length; i++) {
+for (var i = 0; i < tableHeader.length; i++) {
     selectItems.push({
-        id: i+1,
+        id: i + 1,
         name: tableHeader[i],
         tableHeaderCode: tableHeaderCode[i]
     });
@@ -26,18 +26,24 @@ export default function HomeTable(props) {
     const [tableHeaders, setTableHeaders] = useState([]);
     const history = useHistory();
     const [tableDatas, setTableDatas] = useState([]);
+    // eslint-disable-next-line no-unused-vars
     const [currentPage, setCurrentPage] = useState(1);
+    // eslint-disable-next-line no-unused-vars
     const [totalPages, setTotalPages] = useState(0);
+    // eslint-disable-next-line no-unused-vars
     const [pagesNav, setPagesNav] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    // eslint-disable-next-line no-unused-vars
     const [target, setTarget] = useState("all");
     const [orderTarget, setOrderTarget] = useState("all");
     const [order, setOrder] = useState(true);
-    const [selected, setSelected] = useState(selectItems[0])
+    // eslint-disable-next-line no-unused-vars
+    const [selected, setSelected] = useState(selectItems[0]);
+    // eslint-disable-next-line no-unused-vars
     const [searchContent, setSearchContent] = useState("none");
 
     useEffect(() => {
-        var size = 4;
+        var size = Math.round(window.innerHeight/3/75);
         var tempHeaders = [];
         var tempPages = []
         tempPages.push("doubleLeft");
@@ -46,7 +52,7 @@ export default function HomeTable(props) {
             tempHeaders.push({ "value": tableHeader[i], "code": tableHeaderCode[i] });
         }
         setTableHeaders(tempHeaders);
-        fetch("http://192.168.0.105:8888/data/query/" + currentPage + "/" + size + "?target=" + target + "&orderTarget=" + orderTarget + "&order=" + order + "&key="+ searchContent, {
+        fetch(process.env.REACT_APP_URL + "/data/query/" + currentPage + "/" + size + "?target=" + target + "&orderTarget=" + orderTarget + "&order=" + order + "&key=" + searchContent, {
             method: "GET",
             headers: {
                 "token": localStorage.getItem("token")
@@ -98,24 +104,26 @@ export default function HomeTable(props) {
     // },[isLoading])
 
     return (
-        <div>
-            <table className="table-auto border-collapse w-full  min-w-[1024px] 2xl:min-w-[1500px] overflow-y-scroll overflow-x-scroll">
+        <div className='overflow-scroll small-scrollbar'>
+            <table className="w-[1800px] border-collapse overflow-y-scroll overflow-x-scroll small-scrollbar">
                 <thead>
-                    <tr className="bg-blue-400/50 leading-loose text-sm 2xl:text-base shadow-xl dark:bg-orange-500/80">
+                    <tr className="table-head">
                         {tableHeaders.map((data, index) => {
                             return (
-                                <th className="hover:bg-blue-100/50 border-2 border-slate-100 dark:border-gray-500/75">
-                                    <button className="dark:text-gray-100 mx-2"
-                                        onClick={() => {
-                                            if (target !== data.code) {
-                                                setOrder(true);
-                                            } else {
-                                                setOrder(!order);
-                                            }
-                                            setOrderTarget(data.code);
-                                        }} >
-                                        {data.value}
-                                    </button>
+                                <th className="table-title">
+                                    <div className='table-title-cell'>
+                                        <button className="mx-2"
+                                            onClick={() => {
+                                                if (target !== data.code) {
+                                                    setOrder(true);
+                                                } else {
+                                                    setOrder(!order);
+                                                }
+                                                setOrderTarget(data.code);
+                                            }} >
+                                            {data.value}
+                                        </button>
+                                    </div>
                                 </th>
                             )
                         })}
@@ -124,29 +132,89 @@ export default function HomeTable(props) {
                 <tbody>
                     {tableDatas.map((data, index) => {
                         return (
-                            <tr className="text-center border-b border-l border-zinc-100 dark:border-gray-500 leading-loose hover:bg-blue-100/25 odd:bg-slate-200 dark:hover:bg-orange-300/25 dark:odd:bg-orange-100/25  ">
-                                <td className="table-data">{data.collectNode}</td>
-                                <td className="table-data">{data.nodeType}</td>
-                                <td className="table-data">{data.nodeStatus}</td>
-                                <td className="table-data">{data.batteryVoltage}</td>
-                                <td className="table-data">{data.dataNumber}</td>
-                                <td className="table-data">{data.dataLength}</td>
-                                <td className="table-data">{data.firstDataCollectionTime}</td>
-                                <td className="table-data">{data.collectInterval}</td>
-                                <td className="table-data">{data.firstSamplingPointTemperature}</td>
-                                <td className="table-data">{data.firstSamplingPointHumidity}</td>
-                                <td className="table-data">{data.firstSamplingPointAtmosphericPressure}</td>
-                                <td className="table-data">{data.firstSamplingPointWindSpeed}</td>
-                                <td className="table-data">{data.firstSamplingPointWindDirection}</td>
-                                <td className="table-data">{data.receiveTime}</td>
-                                <td className="table-data">{data.softwareVersionNumber}</td>
+                            <tr className="table-content ">
+                                <td className="table-data">
+                                    <div className='table-data-cell'>
+                                        {data.collectNode}
+                                    </div>
+                                </td>
+                                <td className="table-data">
+                                    <div className='table-data-cell'>
+                                        {data.nodeType}
+                                    </div>
+                                </td>
+                                <td className="table-data">
+                                    <div className='table-data-cell'>
+                                        {data.nodeStatus}
+                                    </div>
+                                </td>
+                                <td className="table-data">
+                                    <div className='table-data-cell'>
+                                        {data.batteryVoltage}
+                                    </div>
+                                </td>
+                                <td className="table-data">
+                                    <div className='table-data-cell'>
+                                        {data.dataNumber}
+                                    </div>
+                                </td>
+                                <td className="table-data">
+                                    <div className='table-data-cell'>
+                                        {data.dataLength}
+                                    </div>
+                                </td>
+                                <td className="table-data">
+                                    <div className='table-data-cell'>
+                                        {data.firstDataCollectionTime}
+                                    </div>
+                                </td>
+                                <td className="table-data">
+                                    <div className='table-data-cell'>
+                                        {data.collectInterval}
+                                    </div>
+                                </td>
+                                <td className="table-data">
+                                    <div className='table-data-cell'>
+                                        {data.firstSamplingPointTemperature}
+                                    </div>
+                                </td>
+                                <td className="table-data">
+                                    <div className='table-data-cell'>
+                                        {data.firstSamplingPointHumidity}
+                                    </div>
+                                </td>
+                                <td className="table-data">
+                                    <div className='table-data-cell'>
+                                        {data.firstSamplingPointAtmosphericPressure}
+                                    </div>
+                                </td>
+                                <td className="table-data">
+                                    <div className='table-data-cell'>
+                                        {data.firstSamplingPointWindSpeed}
+                                    </div>
+                                </td>
+                                <td className="table-data">
+                                    <div className='table-data-cell'>
+                                        {data.firstSamplingPointWindDirection}
+                                    </div>
+                                </td>
+                                <td className="table-data">
+                                    <div className='table-data-cell'>
+                                        {data.receiveTime}
+                                    </div>
+                                </td>
+                                <td className="table-data">
+                                    <div className='table-data-cell'>
+                                        {data.softwareVersionNumber}
+                                    </div>
+                                </td>
                             </tr>
                         )
                     })}
                 </tbody>
             </table>
             <div className="container w-11/12 mt-2 ml-24 pt-2 leading-loose">
-                {isLoading ? (<div className="dark:text-gray-100"><LoadingAnime /></div>) : null}
+                {isLoading ? (<div className=""><LoadingAnime /></div>) : null}
             </div>
         </div>
 

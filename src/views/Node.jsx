@@ -1,7 +1,8 @@
 import { KeyboardArrowDownOutlined } from '@mui/icons-material';
 import { Button, MenuItem, Menu } from '@mui/material'
 import React from 'react'
-import ChartCard from '../components/charts/ChartCard';
+import { useEffect } from 'react';
+import NodeCharts from '../components/charts/node/NodeCharts';
 
 export default function Node() {
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -13,7 +14,7 @@ export default function Node() {
         setAnchorEl(event.currentTarget);
     };
     const handleClose = (event) => {
-        setStates({...states, selected: event.target.innerText});
+        setStates({ selected: event.currentTarget.innerText });
         setAnchorEl(null);
     };
 
@@ -33,8 +34,8 @@ export default function Node() {
                     lineHeight: '1.8',
                 }}
             >
-                { states.selected ? states.selected : "节点选择" }
-                <KeyboardArrowDownOutlined/>
+                {states.selected ? states.selected : "选择能源站地点"}
+                <KeyboardArrowDownOutlined />
             </Button>
             <Menu
                 id="basic-menu"
@@ -45,12 +46,14 @@ export default function Node() {
                     'aria-labelledby': 'basic-button',
                 }}
             >
-                <MenuItem onClick={handleClose}>节点-1</MenuItem>
-                <MenuItem onClick={handleClose}>节点-2</MenuItem>
-                <MenuItem onClick={handleClose}>节点-3</MenuItem>
+                <MenuItem onClick={handleClose}>张江高科技园区</MenuItem>
+                <MenuItem onClick={handleClose}>上海森兰外高桥</MenuItem>
+                <MenuItem onClick={handleClose}>新虹桥国际医疗中心</MenuItem>
             </Menu>
-            {/* 结点展示内容 */}
-            <ChartCard typeData={"temp"} className="w-96 h-96"></ChartCard>    
+            {states.selected === "张江高科技园区" ? <NodeCharts station={"ZHANG_JIANG"}/> : null}
+            {states.selected === "上海森兰外高桥" ? <NodeCharts station={"WAI_GAO_QIAO"}/> : null}
+            {states.selected === "新虹桥国际医疗中心" ? <NodeCharts station={"XIN_HONG_QIAO"}/> : null}
+            {states.selected === null ? <NodeCharts station={"ZHANG_JIANG"}/> : null}
         </div>
     )
 }

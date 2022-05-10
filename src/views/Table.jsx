@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import FullTable from '../components/tables/FullTable'
 
 export default function Home() {

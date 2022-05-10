@@ -3,9 +3,9 @@ import { CircularProgress } from '@mui/material';
 import React, { Fragment, useState } from 'react'
 import { useTimeoutFn } from 'react-use';
 
-export default function QueryModel() {
-    let [isOpen, setIsOpen] = useState(false);
-    let [states, setStates] = useState({
+export default function ShutdownCancelModal() {
+    const [isOpen, setIsOpen] = useState(false);
+    const [states, setStates] = useState({
         isSend: false,
         isLoaded: false,
         isResponse: false,
@@ -33,6 +33,8 @@ export default function QueryModel() {
         setIsOpen(false);
         setStates({ isSend: false, isLoaded: false, isResponse: false });
     }
+
+
 
     function openModal() {
         setIsOpen(true);
@@ -63,9 +65,9 @@ export default function QueryModel() {
                         className='mx-6 my-3 font-[350] text-[#7C97AA]'
                         style={{
                             fontSize: Math.round(window.outerWidth / 110),
-                        }}
+                        }}    
                     >
-                        内存开销查询
+                        取消关闭服务器指令
                     </div>
                 </button>
             </div>
@@ -109,7 +111,7 @@ export default function QueryModel() {
                                     <Dialog.Title
                                         className="text-2xl font-light leading-6 text-gray-900"
                                     >
-                                        查询内存开销情况
+                                        发送取消关机请求
                                     </Dialog.Title>
                                     <div className='flex flex-row justify-center'>
                                         {states.isSend ? <ReplyDisplay /> : null}
@@ -135,6 +137,16 @@ export default function QueryModel() {
         const buff = total - free;
         const available = buff - free;
 
+        const getShutdownTime = () => {
+            var currentTime = new Date(new Date().getTime() + 10 * 60 * 1000);
+            var year = currentTime.getFullYear();
+            var month = currentTime.getMonth() + 1;
+            var day = currentTime.getDate();
+            var hour = currentTime.getHours();
+            var minute = currentTime.getMinutes();
+            var second = currentTime.getSeconds();
+            return "sever@root:~ The system shutdown has been cancelled at " + year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second + " CST.";
+        }
 
         const rows = [
             createData('mem:', total, used, free, shared, buff, available),
@@ -154,40 +166,17 @@ export default function QueryModel() {
                         !states.isResponse
                             ? 
                             <div>
-                                <div className='text-xl text-left text-purple-600/90 ml-4'>～: free</div>
+                                <div className='text-xl text-left text-purple-600/90 ml-4'>～: shutdown -c</div>
                                 <CircularProgress />
                             </div>
                             :
                             <div className='relative '>
-                                <div className='text-xl font-light text-purple-600/90 ml-4'>～: free</div>
-                                <div className='text-xl font-light text-gray-500 ml-4'>sever@root:~</div>
-                                <table className=''>
-                                    <thead className=''>
-                                        <tr>
-                                            <th className='text-center text-2xl font-light'><div className='min-w-[80px]'>&nbsp;&nbsp;&nbsp;&nbsp;</div></th>
-                                            <th className='text-center text-2xl font-light'><div className='min-w-[80px]'>total</div></th>
-                                            <th className='text-center text-2xl font-light'><div className='min-w-[80px]'>used</div></th>
-                                            <th className='text-center text-2xl font-light'><div className='min-w-[80px]'>free</div></th>
-                                            <th className='text-center text-2xl font-light'><div className='min-w-[80px]'>shared</div></th>
-                                            <th className='text-center text-2xl font-light'><div className='min-w-[80px]'>buff/cache</div></th>
-                                            <th className='text-center text-2xl font-light'><div className='min-w-[80px]'>available</div></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {rows.map((row) => (
-                                            <tr key={row.name}>
-                                                <td className='text-xl '><div className='flex items-center justify-center min-w-[180px] h-[32px]'>{row.name}</div></td>
-                                                <td className='text-xl '><div className='flex items-center justify-center min-w-[180px] h-[32px]'>{row.total}</div></td>
-                                                <td className='text-xl '><div className='flex items-center justify-center min-w-[180px] h-[32px]'>{row.used}</div></td>
-                                                <td className='text-xl '><div className='flex items-center justify-center min-w-[180px] h-[32px]'>{row.free}</div></td>
-                                                <td className='text-xl '><div className='flex items-center justify-center min-w-[180px] h-[32px]'>{row.shared}</div></td>
-                                                <td className='text-xl '><div className='flex items-center justify-center min-w-[180px] h-[32px]'>{row.buff}</div></td>
-                                                <td className='text-xl '><div className='flex items-center justify-center min-w-[180px] h-[32px]'>{row.available}</div></td>
-                                            </tr>
-                                        ))}
-                                    </tbody>
-                                </table>
-
+                                <div className='text-xl font-light text-purple-600/90 ml-4'>～: shutdown -c</div>
+                                {
+                                    <div className='text-xl font-light text-gray-500 ml-4'>
+                                        {getShutdownTime()}
+                                    </div>
+                                }
                             </div>
                 }
             </div>

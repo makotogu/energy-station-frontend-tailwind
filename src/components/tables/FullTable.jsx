@@ -4,7 +4,6 @@ import { ArchiveIcon } from '@heroicons/react/outline';
 import React, { useState, useEffect, Fragment } from 'react';
 import { useHistory } from 'react-router-dom';
 import LoadingAnime from '../anime/LoadingAnime';
-import "./FullTable.css";
 
 const tableHeader = [
     "环境采样节点ID", "节点类型", "结点状态", "电池电压", "数据点数",
@@ -40,7 +39,7 @@ export default function FullTable(props) {
     const [searchContent, setSearchContent] = useState("none");
 
     useEffect(() => {
-        var size = window.innerHeight > 1000 ? Math.round(window.innerHeight / 50) : Math.round(window.innerHeight / 110);
+        var size = window.innerHeight > 1000 ? Math.round(window.innerHeight / 120) : Math.round(window.innerHeight / 140);
         var tempHeaders = [];
         var tempPages = []
         tempPages.push("doubleLeft");
@@ -49,7 +48,7 @@ export default function FullTable(props) {
             tempHeaders.push({ "value": tableHeader[i], "code": tableHeaderCode[i] });
         }
         setTableHeaders(tempHeaders);
-        fetch("http://192.168.0.105:8888/data/query/" + currentPage + "/" + size + "?target=" + target + "&orderTarget=" + orderTarget + "&order=" + order + "&key="+ searchContent, {
+        fetch(process.env.REACT_APP_URL+"/data/query/" + currentPage + "/" + size + "?target=" + target + "&orderTarget=" + orderTarget + "&order=" + order + "&key="+ searchContent, {
             method: "GET",
             headers: {
                 "token": localStorage.getItem("token")
@@ -108,9 +107,9 @@ export default function FullTable(props) {
             return;
         }
         setIsLoading(true);
-        var size = window.innerHeight > 1000 ? Math.round(window.innerHeight / 50) : Math.round(window.innerHeight / 110);
+        var size = window.innerHeight > 1000 ? Math.round(window.innerHeight / 120) : Math.round(window.innerHeight / 140);
         var tempPages = []
-        fetch("http://192.168.0.105:8888/data/query/" + currentPage + "/" + size + "?target=" + target + "&order=" + false + "&key=" + searchContent, {
+        fetch(process.env.REACT_APP_URL+"/data/query/" + currentPage + "/" + size + "?target=" + target + "&order=" + false + "&key=" + searchContent, {
             method: "GET",
             headers: {
                 "token": localStorage.getItem("token")
@@ -163,7 +162,7 @@ export default function FullTable(props) {
                 <div className="w-48">
                     <Listbox value={selected} onChange={setSelected}>
                         <div className="relative mt-1">
-                            <Listbox.Button className="relative w-full py-2 pl-3 pr-10 text-left bg-white rounded-lg shadow-md cursor-default focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-blue-300 dark:focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 sm:text-sm">
+                            <Listbox.Button className="relative w-full py-2 pl-3 pr-10 text-left bg-white rounded-lg shadow-md cursor-default focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-blue-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 sm:text-sm">
                                 { target === "all" ? <span className="block truncate">请选择内容</span> : <span className="block truncate">{selected.name}</span> }
                                 <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
                                     <SelectorIcon
@@ -183,7 +182,7 @@ export default function FullTable(props) {
                                         <Listbox.Option
                                             key={itemIdx}
                                             className={({ active }) =>
-                                                `cursor-default select-none relative py-2 pl-10 pr-4 ${active ? 'text-blue-800 bg-blue-100 dark:text-amber-900 dark:bg-amber-100' : 'text-gray-900'
+                                                `cursor-default select-none relative py-2 pl-10 pr-4 ${active ? 'text-blue-800 bg-blue-100' : 'text-gray-900'
                                                 }`
                                             }
                                             value={item}
@@ -201,7 +200,7 @@ export default function FullTable(props) {
                                                             {item.name}
                                                     </span>
                                                     {selected ? (
-                                                        <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-blue-600 dark:text-amber-600">
+                                                        <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-blue-600 ">
                                                             <CheckIcon className="w-5 h-5" aria-hidden="true" />
                                                         </span>
                                                     ) : null}
@@ -215,70 +214,165 @@ export default function FullTable(props) {
                     </Listbox>
                 </div>
 
-                <input id="searchBox" onChange={(e) => setSearchContent(e.target.value)} type="text" className="transition transform ease-in-out delay-75 w-54 h-9 mt-1 ml-4 pl-2 rounded-lg ring-1 dark:bg-black/60 bg-transparent ring-blue-200/75 focus:outline-none focus:ring-blue-200 focus:shadow-md  focus:shadow-sky-300/25 focus:bg-blue-50/10 focus:scale-110 dark:text-white" placeholder="搜索数据内容" />
-                <button onClick={() => {handleSearch()}} className="transition transform delay-[25] h-9 mt-1 ml-6 bg-blue-800/75 text-slate-100 px-4 py-1 rounded-md font-medium ring-1 ring-inset hover:scale-110 dark:bg-orange-500">搜索</button>
-                <button className="absolute flex right-16 bg-blue-200 p-2 rounded-lg"onClick={() => {window.location.reload()}}><ArchiveIcon className="w-5 h-5 dark:text-slate-100/50 my-auto"/><div className="text-xl">恢复</div></button>
+                <input id="searchBox" onChange={(e) => setSearchContent(e.target.value)} type="text" className="transition transform ease-in-out delay-75 w-54 h-9 mt-1 ml-4 pl-2 rounded-lg ring-1 bg-transparent ring-blue-200/75 focus:outline-none focus:ring-blue-200 focus:shadow-md  focus:shadow-sky-300/25 focus:bg-blue-50/10 focus:scale-110 " placeholder="搜索数据内容" />
+                <button 
+                    onClick={() => {handleSearch()}} 
+                    className="transition transform delay-[25] flex items-center justify-center h-10 mt-1 ml-6 font-medium ring-1 ring-inset hover:scale-110 "
+                    style={{
+                        border: "none",
+                        backgroundImage: "linear-gradient(#E7F1F9, #EDF5FC),linear-gradient(to bottom right, #FFFFFF, #FFFFFF, #CAD6E5)",
+                        padding: "0.5px",
+                        borderRadius: "20px",
+                        backgroundClip: "content-box,padding-box",
+                        textAlign: "left",
+                        boxShadow: "8px 2px 32px 0px rgba(18,61,101,0.15), -8px -8px 20px 0px rgba(255,255,255,0.6), inset -4px -3px 40px 0px rgba(255,255,255,0.09)",
+                    }} 
+                >
+                    <div className='mx-4'>搜索</div>
+                </button>
+                <button 
+                className="absolute flex right-16 bg-blue-200 rounded-lg" 
+                style={{
+                    border: "none",
+                    backgroundImage: "linear-gradient(#E7F1F9, #EDF5FC),linear-gradient(to bottom right, #FFFFFF, #FFFFFF, #CAD6E5)",
+                    padding: "0.5px",
+                    borderRadius: "20px",
+                    backgroundClip: "content-box,padding-box",
+                    textAlign: "left",
+                    boxShadow: "8px 2px 32px 0px rgba(18,61,101,0.15), -8px -8px 20px 0px rgba(255,255,255,0.6), inset -4px -3px 40px 0px rgba(255,255,255,0.09)",
+                }} 
+                onClick={() => {window.location.reload()}}>
+                    <div className='m-4 flex flex-row'>
+                        <ArchiveIcon className="w-5 h-5 my-auto"/><div className="text-xl">恢复</div>
+                    </div>
+                </button>
             </div>
-            <table className="table-auto border-collapse w-full  min-w-[1024px] 2xl:min-w-[1500px] overflow-y-scroll overflow-x-scroll">
-                <thead>
-                    <tr className="bg-blue-400/50 leading-loose text-sm 2xl:text-base shadow-xl dark:bg-orange-500/80">
-                        {tableHeaders.map((data, index) => {
-                            return (
-                                <th className="hover:bg-blue-100/50 border-2 border-slate-100 dark:border-gray-500/75">
-                                    <button className="dark:text-gray-100 mx-2"
-                                        onClick={() => {
-                                            if (target !== data.code) {
-                                                setOrder(true);
-                                            } else {
-                                                setOrder(!order);
-                                            }
-                                            setOrderTarget(data.code);
-                                        }} >
-                                        {data.value}
-                                    </button>
-                                </th>
-                            )
-                        })}
-                    </tr>
-                </thead>
-                <tbody>
-                    {tableDatas.map((data, index) => {
-                        return (
-                            <tr className="text-center border-b border-l border-zinc-100 dark:border-gray-500 leading-loose hover:bg-blue-100/25 odd:bg-slate-200 dark:hover:bg-orange-300/25 dark:odd:bg-orange-100/25  ">
-                                <td className="table-data">{data.collectNode}</td>
-                                <td className="table-data">{data.nodeType}</td>
-                                <td className="table-data">{data.nodeStatus}</td>
-                                <td className="table-data">{data.batteryVoltage}</td>
-                                <td className="table-data">{data.dataNumber}</td>
-                                <td className="table-data">{data.dataLength}</td>
-                                <td className="table-data">{data.firstDataCollectionTime}</td>
-                                <td className="table-data">{data.collectInterval}</td>
-                                <td className="table-data">{data.firstSamplingPointTemperature}</td>
-                                <td className="table-data">{data.firstSamplingPointHumidity}</td>
-                                <td className="table-data">{data.firstSamplingPointAtmosphericPressure}</td>
-                                <td className="table-data">{data.firstSamplingPointWindSpeed}</td>
-                                <td className="table-data">{data.firstSamplingPointWindDirection}</td>
-                                <td className="table-data">{data.receiveTime}</td>
-                                <td className="table-data">{data.softwareVersionNumber}</td>
+            <div style={{width:window.innerWidth-266, paddingLeft:"20px", paddingRight:"20px"}}>
+                <div className='overflow-scroll small-scrollbar'>
+                    <table className="border-collapse w-[1800px] overflow-y-scroll overflow-x-scroll small-scrollbar ">
+                        <thead>
+                            <tr className="table-head">
+                                {tableHeaders.map((data, index) => {
+                                    return (
+                                        <th className="table-head">
+                                            <div className='table-title-cell'>
+                                                <button className=" mx-2"
+                                                    onClick={() => {
+                                                        if (target !== data.code) {
+                                                            setOrder(true);
+                                                        } else {
+                                                            setOrder(!order);
+                                                        }
+                                                        setOrderTarget(data.code);
+                                                    }} >
+                                                    {data.value}
+                                                </button>
+                                            </div>
+                                        </th>
+                                    )
+                                })}
                             </tr>
-                        )
-                    })}
-                </tbody>
-            </table>
+                        </thead>
+                        <tbody>
+                            {tableDatas.map((data, index) => {
+                                return (
+                                    <tr className="table-content ">
+                                        <td className="table-data">
+                                            <div className='table-data-cell'>
+                                                {data.collectNode}
+                                            </div>
+                                        </td>
+                                        <td className="table-data">
+                                            <div className='table-data-cell'>
+                                                {data.nodeType}
+                                            </div>
+                                        </td>
+                                        <td className="table-data">
+                                            <div className='table-data-cell'>
+                                                {data.nodeStatus}
+                                            </div>
+                                        </td>
+                                        <td className="table-data">
+                                            <div className='table-data-cell'>
+                                                {data.batteryVoltage}
+                                            </div>
+                                        </td>
+                                        <td className="table-data">
+                                            <div className='table-data-cell'>
+                                                {data.dataNumber}
+                                            </div>
+                                        </td>
+                                        <td className="table-data">
+                                            <div className='table-data-cell'>
+                                                {data.dataLength}
+                                            </div>
+                                        </td>
+                                        <td className="table-data">
+                                            <div className='table-data-cell'>
+                                                {data.firstDataCollectionTime}
+                                            </div>
+                                        </td>
+                                        <td className="table-data">
+                                            <div className='table-data-cell'>
+                                                {data.collectInterval}
+                                            </div>
+                                        </td>
+                                        <td className="table-data">
+                                            <div className='table-data-cell'>
+                                                {data.firstSamplingPointTemperature}
+                                            </div>
+                                        </td>
+                                        <td className="table-data">
+                                            <div className='table-data-cell'>
+                                                {data.firstSamplingPointHumidity}
+                                            </div>
+                                        </td>
+                                        <td className="table-data">
+                                            <div className='table-data-cell'>
+                                                {data.firstSamplingPointAtmosphericPressure}
+                                            </div>
+                                        </td>
+                                        <td className="table-data">
+                                            <div className='table-data-cell'>
+                                                {data.firstSamplingPointWindSpeed}
+                                            </div>
+                                        </td>
+                                        <td className="table-data">
+                                            <div className='table-data-cell'>
+                                                {data.firstSamplingPointWindDirection}
+                                            </div>
+                                        </td>
+                                        <td className="table-data">
+                                            <div className='table-data-cell'>
+                                                {data.receiveTime}
+                                            </div>
+                                        </td>
+                                        <td className="table-data">
+                                            <div className='table-data-cell'>
+                                                {data.softwareVersionNumber}
+                                            </div>
+                                        </td>
+                                    </tr>
+                                )
+                            })}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
             <div className="container w-11/12 mt-2 ml-24 pt-2 leading-loose">
                 {isLoading ? (<div className="dark:text-gray-100"><LoadingAnime /></div>) :
                     pagesNav.map(nav => {
                         switch (nav) {
-                            case "doubleLeft": return (<button><ChevronDoubleLeftIcon onClick={() => setCurrentPage(1)} className="w-4 h-4 dark:text-white" /></button>);
-                            case "left": return (currentPage === 1 ? <button><ChevronLeftIcon className="w-4 h-4 mx-1 text-slate-400" /></button> : <button><ChevronLeftIcon onClick={() => setCurrentPage(currentPage - 1)} className="w-4 mx-1 dark:text-white" /></button>);
-                            case "right": return (currentPage === totalPages ? <button><ChevronRightIcon className="w-4 h-4 mx-1 text-slate-400" /></button> : <button><ChevronRightIcon onClick={() => setCurrentPage(currentPage + 1)} className="w-4 mx-1 dark:text-white" /></button>);
-                            case "doubleRight": return (<button><ChevronDoubleRightIcon onClick={() => setCurrentPage(totalPages)} className="w-4 h-4 dark:text-white" /></button>);
-                            case "currentPage": return (<button className="transition transform ease-in-out delay-75 mx-3 text-blue-400 dark:text-orange-400 font-medium text-xl scale-150 -translate-y-1">{currentPage}</button>);
-                            case "...": return (<button className="dark:text-white">{nav}</button>)
-                            default: return (<button onClick={() => setCurrentPage(nav)} className="transition transform ease-in-out delay-75 mx-1 font-thin text-xl scale-100 dark:text-white">{nav}</button>);
+                            case "doubleLeft": return (<button><ChevronDoubleLeftIcon onClick={() => setCurrentPage(1)} className="w-4 h-4 " /></button>);
+                            case "left": return (currentPage === 1 ? <button><ChevronLeftIcon className="w-4 h-4 mx-1 text-slate-400" /></button> : <button><ChevronLeftIcon onClick={() => setCurrentPage(currentPage - 1)} className="w-4 mx-1 " /></button>);
+                            case "right": return (currentPage === totalPages ? <button><ChevronRightIcon className="w-4 h-4 mx-1 text-slate-400" /></button> : <button><ChevronRightIcon onClick={() => setCurrentPage(currentPage + 1)} className="w-4 mx-1 " /></button>);
+                            case "doubleRight": return (<button><ChevronDoubleRightIcon onClick={() => setCurrentPage(totalPages)} className="w-4 h-4 " /></button>);
+                            case "currentPage": return (<button className="transition transform ease-in-out delay-75 mx-3 text-blue-400 font-medium text-xl scale-150 -translate-y-1">{currentPage}</button>);
+                            case "...": return (<button className="">{nav}</button>)
+                            default: return (<button onClick={() => setCurrentPage(nav)} className="transition transform ease-in-out delay-75 mx-1 font-thin text-xl scale-100 ">{nav}</button>);
                         }
                     })}
-                <div className="inline-block ml-8 text-xl dark:text-white">共{totalPages}页</div>
+                <div className="inline-block ml-8 text-xl ">共{totalPages}页</div>
             </div>
         </div>
 

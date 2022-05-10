@@ -2,6 +2,7 @@ import React, { Fragment, useEffect, useState } from 'react';
 import { BellIcon, UserIcon } from '@heroicons/react/solid';
 import { Menu, Transition } from '@headlessui/react';
 import { Link, useHistory } from 'react-router-dom';
+import { Avatar, Stack } from '@mui/material';
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
@@ -48,8 +49,18 @@ export default function UserMenu() {
                 </div>
             </Transition>
             <Menu>
-                <Menu.Button className="hidden sm:inline text-xl left-0 dark:text-white">欢迎您！   {localStorage.getItem("username")}</Menu.Button>
-                <Menu.Button className="inline sm:hidden text-xl left-0"><UserIcon className="h-8 absolute bottom-0 right-2 text-gray-400" /></Menu.Button>
+                <Menu.Button className="inline w-[200px] h-[64px] text-xl left-0 dark:text-white"> 
+                    <Stack direction="row" spacing="0.5rem">
+                        <div className="inline-block pt-[6px]">
+                            欢迎您！
+                        </div>
+                        <Avatar>{localStorage.getItem("username")[0]}</Avatar>
+                        <div className="inline-block pt-[6px]">
+                            {localStorage.getItem("username")}
+                        </div>
+                    </Stack>
+
+                </Menu.Button>
                 <Transition
                     as={Fragment}
                     enter="transition ease-out duration-100"

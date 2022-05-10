@@ -28,7 +28,7 @@ export default function ComputerLoginPart() {
 
     const handleRegister = () => {
         if (username !== "" && password !== "") {
-            fetch("http://localhost:8888/user/register",
+            fetch(process.env.REACT_APP_URL + "/user/register",
                 {
                     method: 'POST',
                     headers: {
@@ -56,7 +56,7 @@ export default function ComputerLoginPart() {
 
     const handleLogin = () => {
         if (username !== "" && password !== "") {
-            fetch("http://192.168.0.105:8888/user/login",
+            fetch(process.env.REACT_APP_URL+"/user/login",
                 {
                     method: 'POST',
                     headers: {
