@@ -1,70 +1,52 @@
-# Getting Started with Create React App
+# 能源站项目的前端页面
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 如何启动项目
 
-## Available Scripts
+### 前置条件
 
-In the project directory, you can run:
+使用node.js进行设置环境，开发环境使用的17.4\
+node版本通过`node -v`检查\
+在拉取本项目后使用`npm install`或`yarn install`安装需要的内容
 
-### `npm start`
+### `npm start` 或者 `yarn start`启动项目
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+项目会运行在本地浏览器[http://localhost:3000](http://localhost:3000).
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 项目文件解释
 
-### `npm test`
+### 配置文件
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+项目更目录中的`tailwind.config.js`是管理`tailwind css`的配置文件\
+`package.json`是管理项目使用的插件包的文件\
 
-### `npm run build`
+### src目录中内容
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+#### `components` 项目组件管理
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+anime中动画组件\
+charts中放图表组件\
+command-bar中是对主页中命令下发组件的控制\
+drop-nav中放置下拉导航栏\
+login-parts中放置登陆页面中的滑动效果实现的模块\
+structure中放置每个结构的内容\
+tables中放置表格组件\
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+#### `views`放构成web的主要页面
 
-### `npm run eject`
+#### `static`放静态资源（图片)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## 主要参考第三方库
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+* material ui [MUI官网](https://mui.com/zh/)
+* tailwind css [官网](https://tailwindcss.com)
+  * 与tailwind配合很好的组件 [headless ui](https://headlessui.dev)
+  * 很好的图标库 [heroicon](https://heroicons.com)
+* recharts 图表库 [官网](https://recharts.org/en-US/)
+* 动画库 [animeJS](https://www.animejs.cn)
+* 工具库 [react-use](https://github.com/streamich/react-use)
+* 路由 [react-router-dom@v5](https://v5.reactrouter.com)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## React
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+[快速入门](https://youtu.be/j942wKiXFu8) youtube react教程
+[hooks入门](https://www.bilibili.com/video/BV1JU4y1E73v?share_source=copy_web) 9分钟掌握React Hooks正确认知
