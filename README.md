@@ -49,5 +49,5 @@ tables中放置表格组件\
 
 ## React
 
-[快速入门](https://youtu.be/j942wKiXFu8) youtube react教程
+[快速入门](https://youtu.be/j942wKiXFu8) youtube react教程\
 [hooks入门](https://www.bilibili.com/video/BV1JU4y1E73v?share_source=copy_web) 9分钟掌握React Hooks正确认知
