@@ -18,6 +18,7 @@ node版本通过`node -v`检查\
 
 项目更目录中的`tailwind.config.js`是管理`tailwind css`的配置文件\
 `package.json`是管理项目使用的插件包的文件\
+`.env`为环境变量管理文件更改内容修改全局变量，使用`REACT_APP_`作为变量开头
 
 ### src目录中内容
 
