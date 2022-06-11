@@ -16,9 +16,9 @@ const tableHeaderCode = [
     "first_sampling_point_atmospheric_pressure", "first_sampling_point_wind_speed", "first_sampling_point_wind_direction", "receive_time", "software_version_number"
 ];
 const selectItems = [];
-for(var i = 0; i < tableHeader.length; i++) {
+for (var i = 0; i < tableHeader.length; i++) {
     selectItems.push({
-        id: i+1,
+        id: i + 1,
         name: tableHeader[i],
         tableHeaderCode: tableHeaderCode[i]
     });
@@ -39,7 +39,7 @@ export default function FullTable(props) {
     const [searchContent, setSearchContent] = useState("none");
 
     useEffect(() => {
-        var size = window.innerHeight > 1000 ? Math.round(window.innerHeight / 120) : Math.round(window.innerHeight / 140);
+        var size = window.innerHeight > 1000 ? Math.round(window.innerHeight / 110) : Math.round(window.innerHeight / 120);
         var tempHeaders = [];
         var tempPages = []
         tempPages.push("doubleLeft");
@@ -48,7 +48,8 @@ export default function FullTable(props) {
             tempHeaders.push({ "value": tableHeader[i], "code": tableHeaderCode[i] });
         }
         setTableHeaders(tempHeaders);
-        fetch(process.env.REACT_APP_URL+"/data/query/" + currentPage + "/" + size + "?target=" + target + "&orderTarget=" + orderTarget + "&order=" + order + "&key="+ searchContent, {
+        fetch(process.env.REACT_APP_URL + "/data/query/" + currentPage + "/" + size + "?target="
+            + target + "&orderTarget=" + orderTarget + "&order=" + order + "&key=" + searchContent, {
             method: "GET",
             headers: {
                 "token": localStorage.getItem("token")
@@ -97,10 +98,10 @@ export default function FullTable(props) {
         if (isLoading) {
             setIsLoading(false);
         }
-    },[isLoading])
+    }, [isLoading])
 
     const handleSearch = () => {
-        var searchBox =  document.getElementById("searchBox").value;
+        var searchBox = document.getElementById("searchBox").value;
         console.log(searchBox);
         if (target === "all" && searchBox) {
             alert("请选择搜索内容，再进行搜索")
@@ -109,7 +110,7 @@ export default function FullTable(props) {
         setIsLoading(true);
         var size = window.innerHeight > 1000 ? Math.round(window.innerHeight / 120) : Math.round(window.innerHeight / 140);
         var tempPages = []
-        fetch(process.env.REACT_APP_URL+"/data/query/" + currentPage + "/" + size + "?target=" + target + "&order=" + false + "&key=" + searchContent, {
+        fetch(process.env.REACT_APP_URL + "/data/query/" + currentPage + "/" + size + "?target=" + target + "&order=" + false + "&key=" + searchContent, {
             method: "GET",
             headers: {
                 "token": localStorage.getItem("token")
@@ -163,7 +164,7 @@ export default function FullTable(props) {
                     <Listbox value={selected} onChange={setSelected}>
                         <div className="relative mt-1">
                             <Listbox.Button className="relative w-full py-2 pl-3 pr-10 text-left bg-white rounded-lg shadow-md cursor-default focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-blue-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 sm:text-sm">
-                                { target === "all" ? <span className="block truncate">请选择内容</span> : <span className="block truncate">{selected.name}</span> }
+                                {target === "all" ? <span className="block truncate">请选择内容</span> : <span className="block truncate">{selected.name}</span>}
                                 <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
                                     <SelectorIcon
                                         className="w-5 h-5 text-gray-400"
@@ -192,20 +193,21 @@ export default function FullTable(props) {
                                                     setTarget(item.tableHeaderCode);
                                                 }
                                                 return (
-                                                <>
-                                                    <span
-                                                        className={`block truncate ${selected ? 'font-medium' : 'font-normal'
-                                                            }`}
-                                                    >
+                                                    <>
+                                                        <span
+                                                            className={`block truncate ${selected ? 'font-medium' : 'font-normal'
+                                                                }`}
+                                                        >
                                                             {item.name}
-                                                    </span>
-                                                    {selected ? (
-                                                        <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-blue-600 ">
-                                                            <CheckIcon className="w-5 h-5" aria-hidden="true" />
                                                         </span>
-                                                    ) : null}
-                                                </>
-                                            )}}
+                                                        {selected ? (
+                                                            <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-blue-600 ">
+                                                                <CheckIcon className="w-5 h-5" aria-hidden="true" />
+                                                            </span>
+                                                        ) : null}
+                                                    </>
+                                                )
+                                            }}
                                         </Listbox.Option>
                                     ))}
                                 </Listbox.Options>
@@ -215,8 +217,8 @@ export default function FullTable(props) {
                 </div>
 
                 <input id="searchBox" onChange={(e) => setSearchContent(e.target.value)} type="text" className="transition transform ease-in-out delay-75 w-54 h-9 mt-1 ml-4 pl-2 rounded-lg ring-1 bg-transparent ring-blue-200/75 focus:outline-none focus:ring-blue-200 focus:shadow-md  focus:shadow-sky-300/25 focus:bg-blue-50/10 focus:scale-110 " placeholder="搜索数据内容" />
-                <button 
-                    onClick={() => {handleSearch()}} 
+                <button
+                    onClick={() => { handleSearch() }}
                     className="transition transform delay-[25] flex items-center justify-center h-10 mt-1 ml-6 font-medium ring-1 ring-inset hover:scale-110 "
                     style={{
                         border: "none",
@@ -226,28 +228,28 @@ export default function FullTable(props) {
                         backgroundClip: "content-box,padding-box",
                         textAlign: "left",
                         boxShadow: "8px 2px 32px 0px rgba(18,61,101,0.15), -8px -8px 20px 0px rgba(255,255,255,0.6), inset -4px -3px 40px 0px rgba(255,255,255,0.09)",
-                    }} 
+                    }}
                 >
                     <div className='mx-4'>搜索</div>
                 </button>
-                <button 
-                className="absolute flex right-16 bg-blue-200 rounded-lg" 
-                style={{
-                    border: "none",
-                    backgroundImage: "linear-gradient(#E7F1F9, #EDF5FC),linear-gradient(to bottom right, #FFFFFF, #FFFFFF, #CAD6E5)",
-                    padding: "0.5px",
-                    borderRadius: "20px",
-                    backgroundClip: "content-box,padding-box",
-                    textAlign: "left",
-                    boxShadow: "8px 2px 32px 0px rgba(18,61,101,0.15), -8px -8px 20px 0px rgba(255,255,255,0.6), inset -4px -3px 40px 0px rgba(255,255,255,0.09)",
-                }} 
-                onClick={() => {window.location.reload()}}>
+                <button
+                    className="absolute flex right-16 bg-blue-200 rounded-lg"
+                    style={{
+                        border: "none",
+                        backgroundImage: "linear-gradient(#E7F1F9, #EDF5FC),linear-gradient(to bottom right, #FFFFFF, #FFFFFF, #CAD6E5)",
+                        padding: "0.5px",
+                        borderRadius: "20px",
+                        backgroundClip: "content-box,padding-box",
+                        textAlign: "left",
+                        boxShadow: "8px 2px 32px 0px rgba(18,61,101,0.15), -8px -8px 20px 0px rgba(255,255,255,0.6), inset -4px -3px 40px 0px rgba(255,255,255,0.09)",
+                    }}
+                    onClick={() => { window.location.reload() }}>
                     <div className='m-4 flex flex-row'>
-                        <ArchiveIcon className="w-5 h-5 my-auto"/><div className="text-xl">恢复</div>
+                        <ArchiveIcon className="w-5 h-5 my-auto" /><div className="text-xl">恢复</div>
                     </div>
                 </button>
             </div>
-            <div style={{width:window.innerWidth-266, paddingLeft:"20px", paddingRight:"20px"}}>
+            <div style={{ width: window.innerWidth - 266, paddingLeft: "20px", paddingRight: "20px" }}>
                 <div className='overflow-scroll small-scrollbar'>
                     <table className="border-collapse w-[1800px] overflow-y-scroll overflow-x-scroll small-scrollbar ">
                         <thead>
