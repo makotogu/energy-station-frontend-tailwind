@@ -30,7 +30,7 @@ command-bar中是对主页中命令下发组件的控制\
 drop-nav中放置下拉导航栏\
 login-parts中放置登陆页面中的滑动效果实现的模块\
 structure中放置每个结构的内容\
-tables中放置表格组件\
+tables中放置表格组件
 
 #### `views`放构成web的主要页面
 
